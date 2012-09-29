@@ -1,4 +1,6 @@
 #!/usr/bin/perl -w
+use strict;
+use warnings;
 
 # Current Time Value
 my $CurrentTime = `perl -e 'print time, '`;
@@ -10,13 +12,17 @@ print("$OldTime\n");
 
 # Array for userdata directory 
 # Users should change this to their directory
-my @dir = </home/gac3/plugins/Essentials/userdata/*> ;
+#my @files = glob("/home/gac3/plugins/Essentials/userdata/*.yml");
 
-open (USERDATA, "/home/gac3/plugins/Essentials/userdata/w13rd0.yml") || die "couldn't open the file!";
+my $directory = '/home/gac3/plugins/Essentials/userdata';
 
-while ($data = <USERDATA>) {
-  print $data;
+for my $YMLfile (<"$directory/*.yml">) {
+    open my $fh, '<', $YMLfile or die $!;
+
+    while (<$fh>) {
+
+        # process the file's contents
+    }
+
+    close $fh;
 }
-
-close(USERDATA);
-
